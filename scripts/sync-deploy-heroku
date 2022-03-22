@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+## After setting -e (-o errexit), an additional flag is required to use trap for error. Set -E (-o errtrace)
+set -eEuo pipefail
+
+trap 'git rebase --abort' ERR
+
+cd $(dirname $0)/..
+
+# Stash all local changes with message
+git stash push -m "Stashed before synchronizing with ORIGIN."
+
+# Pull all changes from source remote.
+git fetch origin && git pull origin master
+
+# Merge all changes to branch heroku
+git rebase master heroku
+
+# Push branch heroku to my forked repo
+git push myrepo heroku -f
+
+# Push heroku to Heroku repository to deploy
+git push heroku heroku:master -f
+
+# Pop stashed changes to local
+git stash pop
