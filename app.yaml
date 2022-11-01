@@ -1,0 +1,10 @@
+# [START app_yaml]
+runtime: nodejs14
+
+# environment variables section, refer to Settings
+env_variables:
+    CACHE_EXPIRE: '600'
+    CACHE_CONTENT_EXPIRE: '7200'
+    ACCESS_KEY: 'grsshub'
+    SENTRY: 'https://096fab11abca491eaf337b26de1ddd96@o684738.ingest.sentry.io/6267781'
+# [END app_yaml]
